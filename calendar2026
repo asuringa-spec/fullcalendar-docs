@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScaleHealth Events Calendar 2026</title>
+<style>
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: #f9f9f9; 
+    margin: 0; 
+    padding: 0;
+    color: #434343;
+}
+.calendar-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    padding: 0 20px;
+}  
+h1 { 
+    text-align: center; 
+    margin-bottom: 30px; 
+    color: #0085B2;
+    font-size: 2.2rem;
+    font-weight: 700;
+}  
+.month { 
+    margin-bottom: 40px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}  
+.month h2 { 
+    background: #FF5B10; 
+    color: #fff; 
+    padding: 15px; 
+    margin: 0; 
+    font-size: 1.5rem;
+    font-weight: 500;
+}  
+.weekdays, .days { 
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr);
+}
+.days {
+    background: #fff;
+}
+.weekdays div, .days div { 
+    padding: 10px 5px; 
+    text-align: center; 
+    border: 1px solid #E9EDEE; 
+    min-height: 80px;
+    position: relative;
+    font-size: 1.1rem;
+}
+.weekdays div { 
+    background: #31B3AC; 
+    color: #fff; 
+    font-weight: 600;
+    padding: 15px 5px;
+    min-height: auto;
+}
+.days div:empty { background-color: #f5f5f5; }
+.event-list { position: absolute; top: 5px; left: 0; right: 0; padding: 0 5px; }
+.event { 
+    background: #FFCB00; 
+    margin: 2px 0; 
+    padding: 5px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease;
+}
+.event:hover { transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
+.event.plus { background: #0085B2; color: #fff; }
+.event.soldout { background: #434343; color: #fff; text-decoration: line-through; opacity: 0.7; cursor: default; }
+.event-details { 
+    display: none; 
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 100%; 
+    width: 300px; 
+    background: #fff; 
+    border: 2px solid #31B3AC; 
+    padding: 15px; 
+    border-radius: 8px; 
+    text-align: left;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+.event-details.show { 
+    display: block; 
+    max-height: 500px; 
+    opacity: 1;
+}
+.cta { 
+    display: block; 
+    margin: 8px 0; 
+    padding: 8px; 
+    background: #FF5B10; 
+    color: #fff; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.cta:hover { background: #D84C0F; }
+.event-details strong { color: #0085B2; display: block; margin-bottom: 5px; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .event-details {
+        position: relative; 
+        left: 0; 
+        width: 100%; 
+        box-shadow: none;
+        border: 2px solid #31B3AC;
+        margin-top: 5px;
+    }
+    .days div { min-height: 80px; font-size: 0.8rem; }
+    .event { font-size: 0.7rem; padding: 3px; }
+}
+</style>
+</head>
+<body>
+<div class="calendar-container">
+    <h1>ScaleHealth Events Calendar 2026</h1>
+    <div class="month">
+        <h2>January 2026</h2>
+        <div class="weekdays">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        </div>
+        <div class="days">
+            <div></div><div></div><div></div><div></div>
+            <div>1</div><div>2</div><div>3</div>
+            <div>4</div><div>5</div><div>6</div><div>7</div>
+            <div>8
+                <div class="event-list">
+                    <div class="event plus" onclick="toggleDetails(this)">Apollo House — 4:30–8:30 PM</div>
+                    <div class="event-details">
+                        <strong>SC Plus Only</strong><br>
+                        <strong>Agenda:</strong><br>
+                        4:30–5:30 PM — VIP Networking<br>
+                        5:30–6:15 PM — Fireside Chat<br>
+                        6:15–7:30 PM — Curated introductions<br>
+                        <a href="#" class="cta">Reserve Spot</a>
+                        <a href="#" class="cta">Become a Sponsor</a>
+                        <a href="#" class="cta">Request Partnership Call</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleDetails(element) {
+    const details = element.nextElementSibling;
+    // Close all other open details
+    document.querySelectorAll('.event-details').forEach(d => {
+        if (d !== details) d.classList.remove('show');
+    });
+    // Toggle this details
+    details.classList.toggle('show');
+}
+</script>
+</body>
+</html>
